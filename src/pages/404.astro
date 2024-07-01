@@ -1,0 +1,46 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+<Layout title="404">
+    <section class="page_404">
+        <p>404 ERROR</p>
+        <img src="/public/assets/it's-fine-im-fine.gif" alt="Descripción del GIF">
+    </section>
+    
+</Layout>
+
+<style>
+    .page_404{
+        width: 100%;
+        height: calc(100vh - 90px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        gap: 20px;
+    }
+    .page_404 p{
+        text-align: center;
+        font-weight: 1000;
+        font-size: 50px;
+        align-self: center;
+        width: 20%;
+    }
+    .page_404 img{
+        align-self: center;
+        width: 20%;
+    }
+
+    @media (max-width: 748px) {
+        .page_404 p{
+            font-weight: 1000;
+            font-size: 35px;
+            align-self: center;
+            width: 80%;
+        }
+        .page_404 img{
+            align-self: center;
+            width: 80%;
+        }
+    }
+</style>

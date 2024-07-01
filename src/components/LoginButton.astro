@@ -1,0 +1,219 @@
+---
+import Login from "./subcomponents/Login.astro"
+---
+<div class="login_button" id="login-button">
+    <label class="login_button_content button_nav_bar" for="label_login">
+        <p>LOGIN</p>
+    </label>
+    <div class="login_dropdown">
+        <label for="label_login"class="search_x_label">
+            <img class="x_img" src="/src/assets/x_img.svg">
+        </label>   
+        <Login></Login>
+    </div>
+    <input type="checkbox" name="navbar" class="dropdown_shadow_check" id="label_login">
+    <label for="label_login" class="dropdown_shadow"></label>
+    
+
+</div>
+
+<style>
+
+    .login_button{
+        cursor: pointer;
+        color:var(--button_color);
+        z-index: var(--button_z_index,10);
+        box-sizing: border-box;
+        position: static;
+        display: none;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .login_button:has(:checked){
+        --clippy:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        --altura:50%;
+        --shadow:1;
+        --events:auto;
+        --button_check_color:#ffffff1e;
+        --button_z_index:20;
+        position: static;
+        transition: all 0.3s ease-out;
+    }
+
+    .button_nav_bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 3px;
+        transition: all 0.3s ease;
+        background-color:var(--button_check_color,#00000000) 
+    }
+
+    .login_button_content{
+        display: flex;
+        height: 30px;
+        margin: 10px 0;
+    }
+
+    .login_button_content>p{
+        text-align: center;
+        padding: 0 10px;
+        cursor: pointer;
+        height: 100%;
+        background-color: black;
+        font-size: 17px;
+        font-family: 'ProductSans-Light';
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .login_button_content>p:hover{
+        color:black;
+        background-color: white;
+        transform: scale(1.05);
+    }
+
+    .login_dropdown{
+        cursor: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        position: fixed;
+        margin: auto;
+        left: 0;
+        right:0;
+        top:0;
+        bottom: 0;
+        border-radius: 10px;
+        overflow-y:auto;
+        width: 70%;
+        background-image: var(--dropdown_color_gradient);
+        clip-path: var(--clippy,polygon(0 0, 100% 0, 100% 0, 0 0));
+        height: var(--altura,0px);
+        z-index: 1000;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .search_x_label{
+        color:var(--button_color);
+        cursor: pointer;
+        right: 0;
+        top:0;
+        padding: 10px;
+        position: absolute;
+    }
+
+    .search_x_label>img{
+        cursor: pointer;
+    }
+
+    .input_x_check{
+        display: none;
+    }
+
+
+    .dropdown_content_login {
+        display: flex;
+        flex-direction: column;
+        width: 40%;
+        position: relative;
+        height: 60px;
+        bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        background-color: inherit;
+    }
+
+    .dropdown_content_login input {
+        
+        width: 100%;
+        height: 100%;
+        padding-top: 22px;
+        color: #fff;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.0);/* Fondo blanco con 80% de opacidad */
+    }
+
+    .dropdown_content_login label {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: 1px solid white;
+    }
+    .dropdown_content_login label::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        border-bottom: 3px solid var(--search_color);
+        transform: translateX(-100%);
+        transition: all 0.3s ease;
+    }
+
+    .content_name {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown_content_login input:focus {
+        outline: none;
+    }
+
+    .dropdown_content_login input:focus + .label_name .content_name ,
+    .dropdown_content_login input:valid + .label_name .content_name {
+        transform: translateY(-120%);
+        font-size: 14px;
+        left: 0px;
+        color: var(--search_color);
+        opacity: 0.85;
+    }
+    .login_button input:focus + .label_name::after,
+    .login_button input:valid + .label_name::after {
+        transform: translateX(0%);
+    }
+
+    
+    .dropdown_shadow{
+        top:0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--shadow_color);
+        z-index: 100;
+        opacity: var(--shadow,0);
+        transition: opacity 0.3s ease; 
+        pointer-events: var(--events,none);
+        backdrop-filter: blur(5px);
+    }
+    
+    .dropdown_shadow_check{
+        display: none;
+    }
+
+    @media (max-height: 400px) {
+        .user_button {
+            display: none;
+        }
+
+        .login_button:has(:checked){
+            --altura:80%;   
+        }
+    }
+</style>

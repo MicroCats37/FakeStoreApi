@@ -1,0 +1,64 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProductElement from "@/components/ProductElement.astro";
+import { getCategories, getProductsByCategory } from '@/api/productsService';
+import type { Root,CategoryWithProducts } from '@/api/types';
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import SwiperCategory from "@/components/subcomponents/SwiperCategory.astro";
+
+// Obtener las categorías
+const categories = await getCategories();
+
+// Crear un array de categorías y sus productos
+const categoriesWithProducts:CategoryWithProducts[] = await Promise.all(categories.map(async (category) => {
+    const products = await getProductsByCategory(category);
+    return {
+        category: capitalizeFirstLetter(category), // Capitalizar la primera letra de la categoría
+        products: products
+    };
+}));
+---
+
+<Layout title="Categories">
+    <div class="categories-container">
+        {categoriesWithProducts.map(({ category, products }) => (
+            <div class="categories-page">
+                <h2>{category}</h2>
+                <div class="swiper-categories-page">
+                    <SwiperCategory products={products}></SwiperCategory>
+                </div>
+            </div>
+        ))}
+    </div>
+</Layout>
+
+<style>
+    .categories-container{
+        gap:50px;
+        margin: 50px 0px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .categories-page{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .categories-page h2{
+        color: rgb(71, 0, 84);
+        border-radius: 15px;
+        background-color: rgba(137, 43, 226, 0.31);
+        padding:  20px 30px;
+        font-size: 2em;
+        box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.2);
+    }
+    .swiper-categories-page{
+        width: 100%;
+    }
+</style>

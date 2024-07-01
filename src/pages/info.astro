@@ -1,0 +1,82 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+<Layout title="info">
+    <article>
+        <div class="container">
+            <h1>Acerca de esta página de prueba</h1>
+            <p>He creado esta página como parte de mi proceso de aprendizaje y desarrollo de habilidades en programación y desarrollo web. Para este proyecto, he utilizado la <strong>Fake Store API</strong>, una API pública que proporciona datos ficticios sobre productos de una tienda en línea. A continuación, explico en más detalle los objetivos y tecnologías utilizadas en este proyecto.</p>
+    
+            <h2>Objetivos del Proyecto</h2>
+            <ul>
+                <li>
+                    <strong>Probar y mejorar mis conocimientos en desarrollo web</strong>: Este proyecto me ha permitido aplicar conceptos y técnicas que he aprendido en cursos y tutoriales. He podido experimentar con diferentes tecnologías y herramientas, fortaleciendo así mi comprensión y habilidades prácticas.
+                </li>
+                <li>
+                    <strong>Trabajar con una API RESTful</strong>: He utilizado la Fake Store API para realizar solicitudes HTTP y obtener datos sobre productos. Esto me ha permitido practicar el manejo de datos dinámicos y la integración de una API en una aplicación web.
+                </li>
+                <li>
+                    <strong>Desarrollo de una interfaz de usuario interactiva</strong>: He creado una interfaz de usuario simple pero funcional para mostrar los productos obtenidos de la API. He utilizado HTML, CSS y TypeScript para construir la interfaz y mejorar la experiencia del usuario.
+                </li>
+            </ul>
+    
+            <h2>Tecnologías Utilizadas</h2>
+            <ul>
+                <li><strong>TypeScript</strong>: Para añadir tipado estático y mejorar la calidad del código JavaScript.</li>
+                <li><strong>AstroJS</strong>: Para construir la interfaz de usuario con un enfoque moderno y optimizado en el rendimiento.</li>
+                <li><strong>CSS</strong>: Para diseñar y estilizar la interfaz de usuario.</li>
+            </ul>
+    
+            <h2>¿Qué es la Fake Store API?</h2>
+            <p>La Fake Store API es una API gratuita que proporciona datos simulados sobre productos de una tienda en línea. Es una herramienta excelente para desarrolladores que desean practicar la integración de APIs en sus aplicaciones sin la necesidad de acceder a datos reales. Más información sobre la Fake Store API se puede encontrar en su <a href="https://fakestoreapi.com/" target="_blank" rel="noopener noreferrer">sitio web oficial</a>.</p>
+    
+            <h2>Conclusión</h2>
+            <p>Este proyecto ha sido una excelente oportunidad para poner a prueba y mejorar mis habilidades de desarrollo web. He aprendido a integrar y manejar datos de una API, desarrollar una interfaz de usuario interactiva y aplicar mis conocimientos de TypeScript, AstroJS y CSS en un proyecto práctico. Estoy emocionado de seguir aprendiendo y desarrollando mis habilidades en proyectos futuros.</p>
+        </div>
+
+    </article>
+</Layout>
+
+<style>
+    .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 20px;
+            text-align: center;
+            color: #444;
+        }
+
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        p {
+            margin: 15px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            background: #eee;
+            margin: 10px 0;
+            padding: 10px;
+            border-left: 4px solid #590086;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 10px;
+            }
+        }
+</style>

@@ -1,0 +1,222 @@
+---
+import IconSearch from "./icons/IconSearch.astro"
+import SearchContent from "./SearchContent.astro"
+
+---
+
+<div class="search_button button_script">
+    <label class="button_content button_nav_bar" for="label_x">
+        <IconSearch></IconSearch>
+    </label>
+    <div class="search_dropdown">
+        <label for="label_x"class="search_x_label">
+            <img class="x_img" src="/src/assets/x_img.svg">
+        </label>   
+        <div class="dropdown_content_search">
+            <input id="search_input" type="text" name="text" autocomplete="off" required />
+            <div class="label_name">
+                <span class="content_name" id="search">
+                Busqueda
+                </span>
+            </div>
+            
+        </div>
+    </div>
+    <SearchContent></SearchContent>
+    <input type="checkbox" name="navbar" class="dropdown_shadow_check" id="label_x">
+    <label for="label_x" class="dropdown_shadow"></label>
+</div>
+
+<style>
+
+    
+
+    
+
+    .search_button{
+        cursor: pointer;
+        color:var(--button_color);
+        z-index: var(--button_z_index,10);
+        box-sizing: border-box;
+        position: static;
+        display: inline-block;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .search_button:has(:checked){
+        --clippy:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        --altura:300px;
+        --shadow:1;
+        --button_check_color:#ffffff1e;
+        --button_z_index:20;
+        --search_display:flex;
+        position: static;
+        transition: all 0.3s ease-out;
+    }
+
+    .button_nav_bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 3px;
+        transition: all 0.3s ease;
+        background-color:var(--button_check_color,#00000000) 
+    }
+    .button_content{
+        cursor: pointer;
+        display: flex;
+        height: 30px;
+        margin: 10px 0;
+    }
+
+    .button_content>img{
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .search_dropdown{
+        cursor: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        background-image: var(--dropdown_color_gradient);
+        clip-path: var(--clippy,polygon(0 0, 100% 0, 100% 0, 0 0));
+        height: var(--altura,0px);
+        z-index: 10;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 10px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .search_x_label{
+        color:var(--button_color);
+        cursor: pointer;
+        right: 0;
+        top:0;
+        padding: 10px;
+        position: absolute;
+    }
+
+    .search_x_label>img{
+        cursor: pointer;
+        background-color: aliceblue;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .search_x_label input{
+        display: none ;
+    }
+
+
+    .dropdown_content_search {
+        width: 40%;
+        position: relative;
+        height: 60px;
+        bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        background-color: inherit;
+        
+    }
+
+    .dropdown_content_search input {
+        
+        width: 100%;
+        height: 100%;
+        padding-top: 22px;
+        color: #fff;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.0);/* Fondo blanco con 80% de opacidad */
+    }
+
+    .dropdown_content_search .label_name {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: 1px solid white;
+    }
+    .dropdown_content_search .label_name::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        border-bottom: 3px solid var(--search_color);
+        transform: translateX(-100%);
+        transition: all 0.3s ease;
+    }
+
+    .content_name {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown_content_search input:focus {
+        outline: none;
+    }
+
+    .dropdown_content_search input:focus + .label_name .content_name ,
+    .dropdown_content_search input:valid + .label_name .content_name {
+        transform: translateY(-120%);
+        font-size: 14px;
+        left: 0px;
+        color: var(--search_color);
+        opacity: 0.85;
+    }
+    .search_button input:focus + .label_name::after,
+    .search_button input:valid + .label_name::after {
+        transform: translateX(0%);
+    }
+
+    
+    .dropdown_shadow{
+        left: 0;
+        top:50px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--shadow_color);
+        z-index: -10;
+        opacity: var(--shadow,0);
+        transition: opacity 0.3s ease; 
+        pointer-events: var(--events,none);
+        backdrop-filter: blur(5px);
+    }
+
+    .dropdown_shadow_check{
+        display: none;
+    }
+
+    @media (max-width: 748px) {
+
+        .search_button:has(:checked){
+        --altura:150px;
+        
+    }
+
+        .dropdown_content_search {
+            width: 80%;
+        }
+    }
+    
+
+</style>
+
+<script src="/src/utils/search.ts"></script>

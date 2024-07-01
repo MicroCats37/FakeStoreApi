@@ -1,0 +1,148 @@
+---
+import NavBarButtonDrop from "@/components/NavBarButtonDrop.astro"
+import {getCategories} from '@/api/productsService';
+import SearchButton from "@/components/SearchButton.astro"
+import LoginButton from "@/components/LoginButton.astro";
+import UserButton from "./UserButton.astro";
+import CartButton from "./CartButton.astro";
+import Mobile from "./Mobile.astro";
+export const categories: string[] = await getCategories();
+import IconLogo from "./icons/IconLogo.astro";
+---
+
+<header id="nav_bar">
+    <IconLogo></IconLogo>
+    <NavBarButtonDrop categories={categories}></NavBarButtonDrop>
+    <SearchButton></SearchButton>
+    <CartButton></CartButton>
+    <LoginButton></LoginButton>
+    <UserButton></UserButton>
+    <Mobile categories={categories}></Mobile>
+
+    
+</header>
+
+<style>
+
+    :root{
+        --button_color:white;
+        --shadow_color:rgba(0, 0, 0, 0.750);
+        --dropdown_color:rgb(82, 23, 138);
+        --dropdown_color_gradient:linear-gradient(to bottom, rgb(117, 0, 124),rgb(99, 0, 132),rgb(74, 1, 78));
+        --search_color:#8afcd8;
+
+    }
+    #nav_bar{
+        top:0;
+        position: fixed;
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        align-items: center;
+        background-image: linear-gradient(to top, rgb(58, 51, 135),rgb(49, 40, 149), rgb(36, 32, 76));
+        z-index: 1000;
+        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 748px) {
+        #nav_bar{
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+    }
+</style>
+
+<script> 
+
+import { getLocalStorageItem } from '../utils/getcookies';
+import getAuth from '../utils/loginverification';
+document.addEventListener('DOMContentLoaded', () => {
+
+    const auth = getAuth();
+
+    const loginButton = document.getElementById('login-button');
+    const userButton = document.getElementById('user_button');
+    const userButtonMobile = document.getElementById('user_button_mobile');
+    const navbar = document.getElementById('nav_bar');
+    
+    if (window.innerWidth > 748) {
+        if (auth) {
+            // El token está presente, mostrar el botón de logout
+            if (loginButton) loginButton.style.display = 'none';
+            if (userButton) userButton.style.display = 'inline-block';
+        } else {
+            // El token no está presente, mostrar el botón de login
+            if (loginButton) loginButton.style.display = 'inline-block';
+            if (userButton) userButton.style.display = 'none';
+        }
+    }else{
+        if (auth) {
+            // El token está presente, mostrar el botón de logout
+            if (loginButton) loginButton.style.display = 'none';
+            if (userButtonMobile) userButtonMobile.style.display = 'inline-block';
+        } else {
+            // El token no está presente, mostrar el botón de login
+            if (loginButton) loginButton.style.display = 'inline-block';
+            if (userButtonMobile) userButtonMobile.style.display = 'none';
+        }
+        
+
+    }
+
+    if (navbar) {
+        navbar.style.clipPath='polygon(0 0, 100% 0, 100% 100%, 0 100%)';
+        navbar.addEventListener('transitionend', () => {
+        // Desactivar clipPath estableciéndolo a 'none'
+        navbar.style.clipPath = 'none';
+    }, { once: true }); 
+        
+    }
+
+
+});
+
+
+</script>
+
+<script>
+    //****************************Es para el efecto de los Check de los Botones************************************** */
+    const checkboxes = document.querySelectorAll<HTMLInputElement>('input[type="checkbox"][name="navbar"]');
+    // Agregar un event listener a cada casilla de verificación
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // Si la casilla de verificación actual está marcada
+            if (this.checked) {
+                // Desmarcar todas las otras casillas de verificación
+                checkboxes.forEach(otherCheckbox => {
+                    if (otherCheckbox !== this) {
+                        otherCheckbox.checked = false;
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<script src="../utils/cartSave.ts"></script>
+
+<script>
+    //*******************************Es para el cuando se haga click fuera de cada contenedor del boton se cierrn***********/ */
+    /*causa que que al elmminar un carrito se cierre la pestaña de carrrito no es mucho problema pero esa es la razon no se por que xD*/
+    /* ai que le elimine la clase buut_scriop a cartButton.astro*/
+    document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.button_script') as NodeListOf<HTMLElement>;
+
+    document.addEventListener('click', (event: MouseEvent) => {
+
+        buttons.forEach((button) => {
+            const checkbox = button.querySelector('input[type="checkbox"]') as HTMLInputElement;
+            if (!button.contains(event.target as Node)) {
+                checkbox.checked = false;
+            }
+        });
+    });
+});
+
+</script>

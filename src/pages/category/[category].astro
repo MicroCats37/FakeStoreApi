@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import ProductElement from "@/components/ProductElement.astro";
+import { getCategories,getProductsByCategory} from '@/api/productsService';
+import type { Root } from '@/api//types'; 
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+const namescategory =Astro.params
+
+export async function getStaticPaths() {
+    const categories = await getCategories();
+    return categories.map(categoryPage=>({params:{category:categoryPage},}))
+};
+
+const category = namescategory.category 
+const products = await getProductsByCategory(category);
+---
+<Layout title=`${capitalizeFirstLetter(category)}`>
+    <section class="all_products">
+        {
+            products.map((product:Root)=>(
+                <ProductElement product={product}/>
+            ))
+        }
+    </section>
+</Layout>
+
+<style>
+    .all_products{
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(300px,0.5fr)
+        );
+        gap:32px
+    }
+</style>
+

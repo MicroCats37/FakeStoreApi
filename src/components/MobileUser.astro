@@ -1,0 +1,46 @@
+<div class="user_button_mobile" id="user_button_mobile">
+    <p class="user_name"></p>
+    <p class="user_email"></p>
+    <a class="acount" href="/user">Tu Cuenta</a>
+    <button class="logout-button">Logout</button>
+</div>
+
+<style>
+    .user_button_mobile{
+        
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:20px;
+        height: auto;
+        background-color: rgba(0, 0, 0, 0.399);
+        
+        
+    }
+
+    .logout-button{
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: black;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .logout-button:hover{
+        color:black;
+        background-color: #fff;
+    }
+    .acount{
+        background-color: rgba(0, 0, 0, 0.429);
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+    .acount:hover{
+        transform: scale(1.1);
+    }
+</style>
+
+<script src="../utils/userButton.ts"></script>

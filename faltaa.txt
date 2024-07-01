@@ -1,0 +1,11 @@
+--modo mobile la nav bar modificar componentes modo mobil
+---menu hamburguesa
+---pagina user (temaplate).
+---swiper de categorias segun producto en page prouct,
+---un inicio mas llamativo
+---carrito como fixed en mobile, fuera d e la nav bar,
+---buscador funcione
+
+
+*microcat github,
+subir a render o vercel

@@ -1,0 +1,152 @@
+---
+import QuantityButton from "@/components/subcomponents/QuantityButton.astro";
+import IconTrash from "./icons/IconTrash.astro";
+---
+
+<div class="cart_product" id="template-card">
+    
+        <div class="cart_image_container">
+            <div class="cart_image_container_grow">
+                <img class="cart_image" alt="">
+            </div>
+        </div>
+        <div class="cart_product_info">
+            <h1 class="cart_title"></h1>
+            <p class="cart_product_id"></p>
+            <p class="cart_price"></p>
+            <QuantityButton></QuantityButton>
+        </div>
+        <button class="delete_product"><IconTrash></IconTrash></button>
+     
+</div>
+
+<style>
+    .cart_product{
+        margin: 0 10px;
+        box-sizing: border-box;
+        border: solid 3px rgb(82, 23, 138);
+        max-width: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        background-image: linear-gradient(to top, rgb(103, 56, 173), rgb(62, 25, 85));
+        padding: 10px;
+        
+        height: auto;
+        justify-content:space-between;
+        align-items:center;
+        border-radius: 10px;
+        position: relative;
+        box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.2);
+        gap: 20px;
+    }
+    
+    .cart_image_container{
+        margin: 5px;
+        border-radius: 10px;
+        background-color: white;
+        min-width: 20%;
+        max-width: 30%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+        height: 200px;
+    }
+
+    .cart_image_container_grow{
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        position: relative;
+        width: auto;
+    }
+    .cart_image{
+
+        object-fit: cover;
+        width: auto;
+        
+        /*height: auto;*/
+        height: 90%;
+    }
+
+    .cart_product_info{
+        gap: 20px;
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:start;
+    }
+    .cart_title{
+        font-family: "ProductSans-Bold";
+        font-size: 15px;
+        font-weight: 200;
+    }
+    .cart_product_id{
+        display:none;
+        color: black;
+        text-align: center;
+        background-color:rgb(219, 219, 219);
+        border-radius: 5px;
+        aspect-ratio: 1/1;
+    }
+    .delete_product{
+        padding: 10px;
+        border-radius: 10px;
+        width: 5%;
+        margin-right: 20px;
+        background-color: rgb(50, 1, 110);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        aspect-ratio: 1/1;
+    }
+
+    @media (max-width: 748px) {
+        .cart_product{
+            
+        }
+        .cart_product_info{
+            height: 90%;
+            justify-content: space-evenly;
+        }
+        .delete_product{
+            position: absolute;
+            right: 0;
+        }
+    }
+
+
+</style>
+
+<script>
+    document.querySelectorAll('.number-control').forEach(control => {
+        const numberInput = control.querySelector('.number') as HTMLInputElement;
+        const incrementButton = control.querySelector('.increment') as HTMLButtonElement;
+        const decrementButton = control.querySelector('.decrement') as HTMLButtonElement;
+
+        incrementButton.addEventListener('click', () => increment(numberInput));
+        decrementButton.addEventListener('click', () => decrement(numberInput));
+    });
+
+    function increment(numberInput: HTMLInputElement) {
+        const max = parseInt(numberInput.max);
+        let currentValue = parseInt(numberInput.value);
+        if (currentValue < max) {
+            numberInput.value = (currentValue + 1).toString();
+        }
+    }
+
+    function decrement(numberInput: HTMLInputElement) {
+        const min = parseInt(numberInput.min);
+        let currentValue = parseInt(numberInput.value);
+        if (currentValue > min) {
+            numberInput.value = (currentValue - 1).toString();
+        }
+    }
+</script>

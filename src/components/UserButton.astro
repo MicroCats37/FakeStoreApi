@@ -1,0 +1,219 @@
+---
+import IconUser from "./icons/IconUser.astro"
+import IconUserB from "./icons/IconUserB.astro"
+---
+<div class="user_button button_script" id="user_button">
+    <label class="user_button_content button_nav_bar" for="label_user">
+        <IconUserB></IconUserB>
+    </label>
+    <div class="user_dropdown"> 
+        <label for="label_user"class="search_x_label">
+            <img class="x_img" src="/src/assets/x_img.svg">
+            <input type="checkbox" name="navbar" class="input_x_check" id="label_user">
+        </label>   
+        <div class="dropdown_content_user">
+            <IconUser></IconUser>
+            <p class="user_name"></p>
+            <p class="user_email"></p>
+            <a class="acount" href="/user">Tu Cuenta</a>
+            <button class="logout-button">Logout</button>
+        </div>
+    </div>  
+</div>
+
+
+
+<style>
+    
+
+    
+    .user_button{
+        cursor: pointer;
+        color:var(--button_color);
+        z-index: 9;
+        box-sizing: border-box;
+        position: static;
+        display: inline-block;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .user_button:has(:checked){
+        --clippy:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        --altura:300px;
+        --shadow:1;
+        --events:auto;
+        --button_check_color:#ffffff1e;
+        --button_z_index:20;
+        position: static;
+        transition: all 0.3s ease-out;
+    }
+
+    .button_nav_bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 3px;
+        transition: all 0.3s ease;
+        background-color:var(--button_check_color,#00000000) 
+    }
+
+    .user_button_content{
+        cursor: pointer;
+        display: flex;
+        height: 30px;
+        margin: 10px 0;
+    }
+
+    .user_button_content>img{
+        
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .user_dropdown{
+        transform: translateX(calc(-50% + 15px)); 
+        cursor: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        border-radius: 10px;
+        width: auto;
+        background-image: var(--dropdown_color_gradient);
+        clip-path: var(--clippy,polygon(0 50%, 100% 50%, 100% 50%, 0 50%));
+        height: auto;
+        z-index: 10;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .search_x_label{
+        display: none;
+        z-index: 10;
+        color:var(--button_color);
+        cursor: pointer;
+        right: 0;
+        top:0;
+        padding: 10px;
+        position: absolute;
+    }
+
+    .search_x_label>img{
+        cursor: pointer;
+        background-color: aliceblue;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .input_x_check{
+        display: none;
+    }
+
+
+    .dropdown_content_user {
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        padding: 20px;
+        position: relative;
+        gap:10px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+        background-color: inherit;
+    }
+
+    .dropdown_content_user input {
+        
+        width: 100%;
+        height: 100%;
+        padding-top: 22px;
+        color: #fff;
+        border: none;
+        background-color: rgba(255, 255, 255, 0.0);/* Fondo blanco con 80% de opacidad */
+    }
+
+    .dropdown_content_user label {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        border-bottom: 1px solid white;
+    }
+    .dropdown_content_user label::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        border-bottom: 3px solid var(--search_color);
+        transform: translateX(-100%);
+        transition: all 0.3s ease;
+    }
+
+    .content_name {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        padding-bottom: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown_content_user input:focus {
+        outline: none;
+    }
+
+    .dropdown_content_user input:focus + .label_name .content_name ,
+    .dropdown_content_user input:valid + .label_name .content_name {
+        transform: translateY(-120%);
+        font-size: 14px;
+        left: 0px;
+        color: var(--search_color);
+        opacity: 0.85;
+    }
+    .user_button input:focus + .label_name::after,
+    .user_button input:valid + .label_name::after {
+        transform: translateX(0%);
+    }
+
+    .logout-button{
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: black;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .logout-button:hover{
+        color:black;
+        background-color: #fff;
+    }
+    .acount{
+        background-color: rgba(0, 0, 0, 0.429);
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+    .acount:hover{
+        transform: scale(1.1);
+    }
+
+    @media (max-width: 748px) {
+        .user_button {
+            display: none;
+        }
+    }
+    
+</style>
+
+<script src="../utils/userButton.ts">
+    
+</script>
+

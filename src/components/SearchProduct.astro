@@ -1,0 +1,120 @@
+---
+
+import type { Root } from '@/api//types'; 
+interface Props {
+    product: Root;
+    offerPrice?:string;
+}
+
+const { product }: Props = Astro.props;
+const { id, title, price, description, category, image, rating } = product;
+const {offerPrice} =Astro.props
+---
+
+<article class="search_product_content">
+    
+    <a class="search_container_click" href=`/product/${id}`>
+        <div class="search_image_container">
+            <div class="search_image_container_grow">
+                <img class="search_image" alt="" src={image}>
+            </div>
+        </div>
+    </a>
+    <div class="search_product_name">
+        <p class="search_name">{title}</p>
+        <p class="search_id">{id}</p>
+        {
+            offerPrice ? (
+            <p class="real_price">{price}</p>
+            <p class="offer_price">{offerPrice}</p>
+        ):
+        (<p class="offer_price">$/{price}</p>)
+    }
+    </div>
+</article>
+
+<style>
+    .search_product_content{
+        
+        box-sizing: border-box;
+        border: solid 3px rgb(82, 23, 138);
+        width: 100%;
+        right: 0;
+        left: 0;
+        display: none;
+        background-color: rgb(96, 31, 158);
+        padding: 10px;
+        height: auto;
+        justify-content:right;
+        align-items:center;
+        border-radius: 10px;
+        background-image: radial-gradient(ellipse, rgb(103, 56, 173),rgb(61, 42, 100), rgb(62, 25, 85));
+        box-shadow: 0px 10px 2px rgba(0, 0, 0, 0.5);
+        gap: 20px;
+    }
+    .search_container_click{
+        display: flex;
+        width: 40%;
+    }
+    
+    .search_image_container{
+        margin: 5px;
+        border-radius: 10px;
+        background-color: white;
+        width: 100%;
+        
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        
+        height: 200px;
+    }
+
+    .search_image_container_grow{
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        position: relative;
+        width: auto;
+    }
+    .search_image{
+
+        object-fit: cover;
+        width: auto;
+        
+        /*height: auto;*/
+        height: 90%;
+    }
+
+    .search_product_name{
+        flex-grow: 1;
+        gap: 20px;
+        width: 55%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:start;
+    }
+    .search_title{
+        font-family: "ProductSans-Bold";
+        font-size: 15px;
+        font-weight: 200;
+    }
+    .search_id{
+        display:none;
+        color: black;
+        text-align: center;
+        background-color:rgb(219, 219, 219);
+        border-radius: 5px;
+        aspect-ratio: 1/1;
+    }
+    .offer_price{
+        padding: 5px;
+        background-color: rgba(0, 0, 0, 0.345);
+        border-radius: 10px;
+    }
+    
+</style>

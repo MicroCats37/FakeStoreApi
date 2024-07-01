@@ -1,0 +1,273 @@
+---
+import IconCart from "./icons/IconCart.astro"
+---
+
+<div class="cart_button">
+    <label class="cart_button_content button_nav_bar" for="label_xxx">
+        <IconCart></IconCart>
+    </label>
+    <div class="cart_dropdown">   
+        <div class="dropdown_content_cart">
+            <header class="header_cart">
+                <p>Tu Carrito de Compras</p>
+                <label for="label_xxx" class="search_x_label">
+                    <img class="x_img" src="/src/assets/x_img.svg">
+                </label> 
+            </header>
+            <footer class="footer_cart">
+                <button>COMPRAR AHORA</button>
+            </footer> 
+        </div> 
+    </div>  
+    <input type="checkbox" name="navbar" class="dropdown_shadow_check" id="label_xxx">
+    <label for="label_xxx" class="dropdown_shadow"></label>
+</div>
+
+
+<style>
+    
+    
+    .cart_button{
+        cursor: pointer;
+        color:var(--button_color);
+        z-index: var(--button_z_index,10);
+        box-sizing: border-box;
+        position: static;
+        display: inline-block;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+
+    .cart_button:has(:checked){
+        --clippy:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        --shadow:1;
+        --events:auto;
+        --button_check_color:#ffffff1e;
+        --button_z_index:20;
+        position: static;
+        transition: all 0.3s ease-out;
+    }
+
+    .button_nav_bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 3px;
+        transition: all 0.3s ease;
+        background-color:var(--button_check_color,#00000000) 
+    }
+
+    .cart_button_content{
+        cursor: pointer;
+        display: flex;
+        height: 30px;
+        margin: 10px 0;
+    }
+
+    .cart_button_content>img{
+        cursor: pointer;
+        height: 100%;
+    }
+
+    .cart_dropdown{
+        border-radius: 10px 0px 0px 10px;
+        cursor: auto;
+        display: flex;
+        top:0;
+        bottom:0;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        right: 0;
+        width: 50%;
+        background-image: var(--dropdown_color_gradient);
+        
+        clip-path: var(--clippy,polygon(100% 0, 100% 0, 100% 100%, 100% 100%));
+        
+        
+        max-height: 100%;
+        overflow-y: auto;
+        pointer-events: none;
+        z-index: 1000;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .cart_dropdown {
+            scrollbar-width: thin; /* Reduce el ancho de la barra de desplazamiento */
+        }
+        /* Estilos para la barra de desplazamiento en WebKit (Chrome, Safari) */
+        .cart_dropdown::-webkit-scrollbar {
+            width: 8px; /* Ajusta el ancho de la barra de desplazamiento */
+        }
+        .cart_dropdown::-webkit-scrollbar-thumb {
+            background-color: #888; /* Color de la barra de desplazamiento */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .cart_dropdown::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Color de la barra de desplazamiento al pasar el ratón */
+        }
+        .cart_dropdown::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+        }
+        .cart_dropdown::-webkit-scrollbar-button {
+            display: none; /* Oculta las flechas de la barra de desplazamiento */
+        }
+    .header_cart{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        color:var(--button_color);
+        padding: 5px;
+        
+        background-color: #25003d;
+        right: 0;
+        top:0;
+        position:sticky;
+        z-index: 1000;
+    }
+    .header_cart p{
+        font-size: 20px;
+    }
+
+    .footer_cart{
+        display: flex;
+        bottom: 0;
+        margin-top: auto;
+        width: 100%;
+        padding: 10px;
+        
+        background-color: #25003d;
+        justify-content: center;
+        color:var(--button_color);
+        
+
+        position:sticky;
+        z-index: 1000;
+    }
+    .footer_cart button{
+        
+        width: fit-content;
+        min-width: 100px;
+        color: #ffffff;
+        padding: 15px 50px;
+        border-radius: 5px;
+        border: 2.5px solid #E0E1E4;
+        box-shadow: 0px 0px 20px -20px;
+        cursor: pointer;
+        background-color: rgb(0, 0, 0);
+        transition: all 0.2s ease-in-out 0ms;
+        user-select: none;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+    }
+
+    .footer_cart button:hover{
+        color:#000000;
+        background-color: #ffffff;
+        box-shadow: 0px 0px 20px -18px;
+    }
+
+    .search_x_label>img{
+        cursor: pointer;
+        background-color: aliceblue;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .input_x_check{
+        display: none;
+    }
+
+
+    .dropdown_content_cart {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        pointer-events: visible;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: inherit;
+    }
+
+    
+
+    .dropdown_content_cart input:focus {
+        outline: none;
+    }
+
+    .dropdown_content_cart input:focus + .label_name .content_name ,
+    .dropdown_content_cart input:valid + .label_name .content_name {
+        transform: translateY(-120%);
+        font-size: 14px;
+        left: 0px;
+        color: var(--search_color);
+        opacity: 0.85;
+    }
+    .cart_button input:focus + .label_name::after,
+    .cart_button input:valid + .label_name::after {
+        transform: translateX(0%);
+    }
+
+
+    .dropdown_shadow{
+        top:0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--shadow_color);
+        z-index: 100;
+        opacity: var(--shadow,0);
+        transition: opacity 0.3s ease; 
+        pointer-events: var(--events,none);
+        backdrop-filter: blur(5px);
+    }
+    
+    .dropdown_shadow_check{
+        display: none;
+    }
+
+    @media (max-width: 748px) {
+        .cart_button{
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            right:0;
+            bottom: 0;
+            aspect-ratio: 1/1;
+            padding: 15px;
+            background-image: radial-gradient(circle, rgb(103, 56, 173), rgb(62, 25, 85));;
+            border-radius: 50%;
+            position: fixed;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+            
+        }
+        .cart_dropdown{
+            box-sizing: border-box;
+            width: auto;
+            margin: 20px;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            border-radius: 10px;
+            clip-path: var(--clippy,polygon(50% 0, 50% 0, 50% 100%, 50% 100%));
+        }
+
+        .cart_button:has(:checked){
+            position: fixed;
+        }
+
+        
+    }
+</style>

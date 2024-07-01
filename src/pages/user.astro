@@ -1,0 +1,192 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+<Layout title="User">
+    <section class="user-page">
+        <div class="content_user_page">
+        <header>
+            <h1>Información del Usuario</h1>
+        </header>
+        
+        <article id="user-article">
+            <template id="user-template">
+                <section>
+                    <h2>Identificación</h2>
+                    <div class="section-content">
+                        <p><span class="attribute-name">ID:</span> <span id="user-id"></span></p>
+                        <p><span class="attribute-name">Email:</span> <span id="user-email"></span></p>
+                        <p><span class="attribute-name">Nombre de Usuario:</span> <span id="user-username"></span></p>
+                    </div>
+                </section>
+            
+                <section>
+                    <h2>Nombre</h2>
+                    <div class="section-content">
+                        <p><span class="attribute-name">Nombre:</span> <span id="user-firstname"></span></p>
+                        <p><span class="attribute-name">Apellido:</span> <span id="user-lastname"></span></p>
+                    </div>
+                </section>
+            
+                <section>
+                    <h2>Dirección</h2>
+                    <div class="section-content">
+                        <p><span class="attribute-name">Ciudad:</span> <span id="user-city"></span></p>
+                        <p><span class="attribute-name">Calle:</span> <span id="user-street"></span></p>
+                        <p><span class="attribute-name">Número:</span> <span id="user-number"></span></p>
+                        <p><span class="attribute-name">Código Postal:</span> <span id="user-zipcode"></span></p>
+                    </div>
+                </section>
+            
+                <section>
+                    <h2>Geolocalización</h2>
+                    <div class="section-content">
+                        <p><span class="attribute-name">Latitud:</span> <span id="user-lat"></span></p>
+                        <p><span class="attribute-name">Longitud:</span> <span id="user-long"></span></p>
+                    </div>
+                </section>
+            
+                <section>
+                    <h2>Contacto</h2>
+                    <div class="section-content">
+                        <p><span class="attribute-name">Teléfono:</span> <span id="user-phone"></span></p>
+                    </div>
+                </section>
+            </template>
+        </article>
+    </div>
+</section>
+</Layout>
+
+<style>
+    /* Reset de estilos y configuraciones globales */
+    
+        /* Reset de estilos y configuraciones globales */
+        
+        .user-page{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+
+        /* Estilos específicos para el layout y contenido */
+        header {
+            
+            align-self: center;
+            display: flex;
+            background-image: radial-gradient(ellipse, rgb(103, 56, 173),rgb(61, 42, 100), rgb(62, 25, 85));
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 20px;
+        }
+
+        h1 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        article {
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        
+
+        .section-content {
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        /* Estilos para los nombres de atributos en negrita */
+        .attribute-name {
+            font-weight: bold;
+        }
+
+        /* Estilos específicos para las fuentes ProductSans */
+        p, h1, h2, h3 {
+            font-family: 'ProductSans', Arial, sans-serif;
+        }
+
+        /* Media query para estilos responsivos */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</style>
+
+<script>
+    import { getUserById } from '../api/productsService';
+    import type { User } from '../api/types';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const loginId = localStorage.getItem('userData');
+
+        if (!loginId) {
+        // Si no hay información de sesión, redirigir al usuario al inicio
+            window.location.href = '/'; // Reemplaza '/inicio' con la URL de tu página de inicio
+            return;
+        }
+        if (loginId) {
+            const userId = JSON.parse(loginId);
+            const user = await getUserById(userId.id);
+            if (user) {
+                // Obtener el contenido del template y clonarlo
+                const template = document.getElementById('user-template') as HTMLTemplateElement;
+                const clone = document.importNode(template.content, true);
+
+                // Rellenar los datos del usuario en el template clonado
+                (clone.getElementById('user-id') as HTMLParagraphElement).textContent = `ID: ${user.id}`;
+                (clone.getElementById('user-email') as HTMLParagraphElement).textContent = `Email: ${user.email}`;
+                (clone.getElementById('user-username') as HTMLParagraphElement).textContent = `Nombre de Usuario: ${user.username}`;
+                (clone.getElementById('user-firstname') as HTMLParagraphElement).textContent = `Nombre: ${user.name.firstname}`;
+                (clone.getElementById('user-lastname') as HTMLParagraphElement).textContent = `Apellido: ${user.name.lastname}`;
+                (clone.getElementById('user-city') as HTMLParagraphElement).textContent = `Ciudad: ${user.address.city}`;
+                (clone.getElementById('user-street') as HTMLParagraphElement).textContent = `Calle: ${user.address.street}`;
+                (clone.getElementById('user-number') as HTMLParagraphElement).textContent = `Número: ${user.address.number}`;
+                (clone.getElementById('user-zipcode') as HTMLParagraphElement).textContent = `Código Postal: ${user.address.zipcode}`;
+                (clone.getElementById('user-lat') as HTMLParagraphElement).textContent = `Latitud: ${user.address.geolocation.lat}`;
+                (clone.getElementById('user-long') as HTMLParagraphElement).textContent = `Longitud: ${user.address.geolocation.long}`;
+                (clone.getElementById('user-phone') as HTMLParagraphElement).textContent = `Teléfono: ${user.phone}`;
+
+                // Obtener el artículo y añadir el contenido solo si existe
+                const article = document.querySelector('#user-article');
+                if (article) {
+                    article.appendChild(clone);
+                } else {
+                    console.error('No se encontró el elemento <article> en el DOM.');
+                }
+            }
+        }
+    });
+</script>

@@ -1,0 +1,56 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import PageProduct from "@/components/PageProduct.astro";
+import { getCategories,getProductsByCategory,getProductById,getProducts} from '@/api/productsService';
+import type { Root,CategoryWithProducts } from '@/api//types'; 
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+import SwiperCategory from "@/components/subcomponents/SwiperCategory.astro";
+
+export async function getStaticPaths() {
+    const products = await getProducts();
+    return products.map(product => ({
+        params:{slug:product.id.toString()},
+        props:product}))
+};
+
+const product = Astro.props;
+const categories = await getCategories();
+const categoriesWithProducts:CategoryWithProducts[] = await Promise.all(categories.map(async (category) => {
+    const products = await getProductsByCategory(category);
+    return {
+        category: capitalizeFirstLetter(category), // Capitalizar la primera letra de la categoría
+        products: products
+    };
+}));
+
+const productsCategory = categoriesWithProducts.find(cat => cat.category.toLowerCase() === product.category.toLowerCase());
+/*const productsForCategory:Root[]|null|undefined= productsCategory?.products*/
+
+const filteredProducts = productsCategory 
+    ? productsCategory.products.filter(p => p.id !== product.id) 
+    : [];
+---
+
+<Layout title=`${capitalizeFirstLetter(product.title)}`>
+    <PageProduct product={product}></PageProduct>
+    <h2 class="producto_relacionado">Productos relacionados:</h2>
+    {productsCategory && (
+        <SwiperCategory products={filteredProducts} />
+    )}
+</Layout>
+
+<style>
+    .producto_relacionado{
+        margin-top: 30px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        display: inline-block;
+        background-color: rgba(0, 0, 0, 0.845);
+        color: aliceblue;
+        font-family: 'ProductSans-Bold';
+        font-weight: 800;
+        font-size: 20px;
+        text-shadow: 2px 2px 4px rgba(252, 251, 251, 0.862);
+    }
+
+</style>

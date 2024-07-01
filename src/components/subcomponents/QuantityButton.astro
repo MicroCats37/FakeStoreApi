@@ -1,0 +1,51 @@
+<div class="number-control">
+    <button class="decrement">-</button>
+    <input type="number" name="quantity" class="number quantity" value="1" min="1" max="100" readonly>
+    <button class="increment">+</button>
+</div>
+
+<style>
+    .number-control {
+        color: rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        border-radius: 5px 5px 5px 5px;
+        height: 50px;
+        background-color: rgb(0, 0, 0);
+    }
+
+    .number-control button {
+        color: #ffffff;
+        height: 100%;
+        aspect-ratio: 1/1;
+        font-size: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .decrement{
+        border-radius: 5px 0px 0px 5px;
+    }
+    .increment{
+        border-radius: 0px 5px 5px 0px;
+    }
+    .number-control button:hover {
+        background-color: #000000;
+    }
+
+    .number-control input {
+        background-color: #000000;
+        text-align: center;
+        color: #ffffff;
+        text-align: center;
+        height: 100%;
+        aspect-ratio: 1/1;
+        font-size: 20px;
+        pointer-events: none; /* Disable manual input */
+    }
+</style>
+
+<script src='../../utils/updateCart.ts'>
+    
+</script>

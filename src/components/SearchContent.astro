@@ -1,0 +1,55 @@
+---
+
+import SearchProduct from "./SearchProduct.astro";
+import { getProducts} from '@/api/productsService';
+import type { Root } from '@/api//types'; 
+
+
+// Asegúrate de importar correctamente tu función getProducts
+ // Importa la interfaz Root desde tu archivo types.ts
+
+const products: Root[] = await getProducts();
+---
+
+<section class="all_search_products" id="all_search_products">
+    {
+        products.map((product:Root)=>(
+            <SearchProduct product={product}/>
+        ))
+    }
+</section>
+
+<style>
+
+
+    .all_search_products{
+        display: flex;
+        clip-path: var(--clippy,polygon(50% 0, 50% 0, 50% 100%, 50% 100%));
+        flex-direction: column;
+        align-items: flex-start;
+        position: fixed;
+        pointer-events: none;
+        z-index: 1000;
+        margin: 10px;
+        gap: 10px;
+        right:0;
+        left: 0;
+        top:210px;
+        height: calc(100dvh - 240px);
+        flex-grow: 1;
+        overflow:auto;
+        transition: all 0.3s ease-in-out;
+        margin: 0 30%  20px 30%;
+        border-radius: 20px;
+    }
+    @media (max-width: 748px) {
+        .all_search_products{
+            margin: 0 10%  20px 10%;
+            top:135px;
+            height: calc(100% - 165px);
+        }
+    }
+</style>
+
+
+

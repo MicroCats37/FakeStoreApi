@@ -1,0 +1,198 @@
+---
+import MobileUser from "./MobileUser.astro";
+import LoginButton from "./LoginButton.astro";
+import MobileCategory from "./MobileCategory.astro";
+import MobileLogin from "./MobileLogin.astro";
+import IconMobile from "./icons/IconMobile.astro";
+interface Props{
+    categories:string[]
+}
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+const {categories} = Astro.props
+---
+
+<div class="mobile_button button_script">
+    <label class="mobile_button_content button_nav_bar" for="label_mobile">
+        <input type="checkbox" name="navbar" class="dropdown_shadow_check" id="label_mobile">
+        <IconMobile></IconMobile>
+    </label>
+    <div class="mobile_dropdown">   
+        <div class="dropdown_content_mobile">
+            <MobileUser/>
+            <MobileCategory categories={categories}/>
+            <MobileCategory categories={categories}/>
+            <MobileCategory categories={categories}/>
+
+        </div> 
+    </div>  
+    
+    <label for="label_mobile" class="dropdown_shadow_mobile"></label>
+</div>
+
+<style>
+    .mobile_button{
+        cursor: pointer;
+        color:var(--button_color);
+        z-index: var(--button_z_index,10);
+        box-sizing: border-box;
+        position: static;
+        display: inline-block;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+
+    .mobile_button:has(:checked){
+        --clippy:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        --shadow:1;
+        --events:auto;
+        --button_check_color:#ffffff1e;
+        --button_z_index:20;
+        --icon_m_opacity:0;
+        --icon_x_opacity:1;
+        --icon_m_transform:scaleY(0.01);
+        --icon_x_transform:none;
+        position: static;
+        transition: all 0.3s ease-out;
+    }
+
+    .button_nav_bar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+        padding: 3px;
+        transition: all 0.3s ease;
+        background-color:var(--button_check_color,#00000000) 
+    }
+
+    .mobile_button_content{
+        cursor: pointer;
+        display: flex;
+        height: 30px;
+        margin: 10px 0;
+        gap:20px;
+    }
+
+
+    .mobile_dropdown{
+        box-sizing: border-box;
+        cursor: auto;
+        display: flex;
+        top:50px;
+        
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        left:0;
+        right:0;
+        bottom:0;
+        border-radius:10px;
+        background-image: var(--dropdown_color_gradient);
+        clip-path: var(--clippy,polygon(0 50%, 100% 50%, 100% 50%, 0 50%));
+        
+        margin:20px;
+        max-width:100%;
+        max-height: 100%;
+        overflow-y: auto;
+        
+        z-index: 1000;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .mobile_dropdown {
+            scrollbar-width: thin; /* Reduce el ancho de la barra de desplazamiento */
+        }
+        /* Estilos para la barra de desplazamiento en WebKit (Chrome, Safari) */
+        .mobile_dropdown::-webkit-scrollbar {
+            width: 8px; /* Ajusta el ancho de la barra de desplazamiento */
+        }
+        .mobile_dropdown::-webkit-scrollbar-thumb {
+            background-color: #888; /* Color de la barra de desplazamiento */
+            border-radius: 10px; /* Bordes redondeados */
+        }
+        .mobile_dropdown::-webkit-scrollbar-thumb:hover {
+            background-color: #555; /* Color de la barra de desplazamiento al pasar el ratón */
+        }
+        .mobile_dropdown::-webkit-scrollbar-track {
+            background: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+        }
+        .mobile_dropdown::-webkit-scrollbar-button {
+            display: none; /* Oculta las flechas de la barra de desplazamiento */
+        }
+    
+
+    .search_x_label>img{
+        cursor: pointer;
+        background-color: aliceblue;
+        border-radius: 50%;
+        padding: 5px;
+    }
+
+    .input_x_check{
+        display: none;
+    }
+
+
+    .dropdown_content_mobile {
+        
+        display: flex;
+        flex-direction: column;
+
+        width:100%;
+        padding:20px;
+        height:100%;
+        pointer-events: visible;
+        position: relative;
+        background-color: inherit;
+        gap:20px
+    }
+
+    
+
+    .dropdown_content_mobile input:focus {
+        outline: none;
+    }
+
+    .dropdown_content_mobile input:focus + .label_name .content_name ,
+    .dropdown_content_mobile input:valid + .label_name .content_name {
+        transform: translateY(-120%);
+        font-size: 14px;
+        left: 0px;
+        color: var(--search_color);
+        opacity: 0.85;
+    }
+    .mobile_button input:focus + .label_name::after,
+    .mobile_button input:valid + .label_name::after {
+        transform: translateX(0%);
+    }
+
+
+    .dropdown_shadow_mobile{
+        top:50px;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--shadow_color);
+        z-index: -10;
+        opacity: var(--shadow,0);
+        transition: opacity 0.3s ease; 
+        pointer-events: var(--events,none);
+        backdrop-filter: blur(5px);
+    }
+    
+    .dropdown_shadow_check{
+        display: none;
+    }
+
+    @media (min-width: 748px) {
+        .mobile_button {
+            display: none;
+        }
+    }
+</style>

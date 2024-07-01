@@ -1,0 +1,38 @@
+---
+import ProductElement from '../ProductElement.astro';
+import type { Root,CategoryWithProducts } from '@/api//types'; 
+interface Props {
+    products: Root[];
+}
+
+const { products }: Props = Astro.props;
+
+
+---
+
+<div class="swiper swiper_category">
+    <div class="swiper-wrapper">
+        {
+            products.map((product:Root)=>(
+            <div class="swiper-slide">
+                <ProductElement product={product}></ProductElement>
+            </div>
+            ))
+        }
+    </div>
+    <div class="swiper-pagination"></div>
+</div>
+<style>
+    .swiper {
+      width: 100%;
+    }
+
+    .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 250px;
+      height: 500px;
+      margin: 30px;
+    }
+</style>
+<script src="./SwiperCategory.js"></script>

@@ -1,0 +1,160 @@
+---
+import IconArrow from "./icons/IconArrow.astro";
+interface Props{
+    categories:string[]
+}
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
+const {categories} = Astro.props
+---
+
+<div class="dropdown_button_category">
+    <div class="button_category">
+        <div class="button_category_content">
+            <a href="/categories"><p>Categorias</p></a>
+            <label class="button_drop" for="label_mobile">
+                <IconArrow>  
+                </IconArrow>
+                <input type="checkbox">
+            </label>
+        </div> 
+    </div>
+    
+    <div class="dropdown_content">
+        <ul class="list_content">
+            {categories.map((category:string) => (
+            <li>
+                <a href={`/category/${category}`}>{capitalizeFirstLetter(category)}</a>
+            </li>
+            ))}
+        </ul>
+    </div>
+</div>
+
+<style>
+    :root{
+        
+    }
+    .dropdown_button_category{
+        box-sizing: border-box;
+        position: static;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+    .button_category{
+        
+        display: flex;
+        left: 0;
+        right: 0;
+        justify-content: center;
+        align-items:center;
+        
+        
+
+    }
+    .button_category_content{
+        background-image: linear-gradient(to left, rgb(103, 16, 147), rgb(88, 2, 114),rgb(60, 10, 93));
+        border-radius: 5px;
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    .button_category_content p{
+        margin: 0 2px;
+        transition: all 0.3s ease;
+    }
+
+    .button_category_content p:hover{
+        transform: scale(1.1);
+    }
+
+    .button_drop{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .button_drop input{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+    .dropdown_button_category:has(:checked){
+        --altura:200px;
+        --clippy:polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        --bg_arrow:rgb(0, 0, 0);
+        --barra:100%;
+        --arrow_ang:rotate(-180deg);
+        transition: all 0.3s ease-out;
+    }
+    .dropdown_content{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.334);
+        height: var(--altura,0);
+        transition: all 0.3s ease-in-out;
+        overflow: hidden;
+        border-radius: 10px;
+        
+        
+    }
+    .dropdown_content ul{
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .dropdown_content li{
+        margin: 10px;
+    }
+    .button_drop{
+        border-radius: 5px;
+        margin: 5px;
+        background-color: var(--bg_arrow,rgba(24, 24, 24, 0.452));
+        transform: var(--arrow_ang,rotate(0deg));
+        transition: all 0.3s ease-in-out;
+    }
+    .button_category_content a:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: var(--barra,0);
+        background-color: #fff9f0; /* Color del borde inferior */
+        transition: width 0.3s ease-in-out;
+    }
+
+    
+
+
+    
+
+</style>
+
+
+<script>
+    //*******************************Es para el cuando se haga click fuera de cada contenedor del boton se cierrn***********/ */
+    document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.dropdown_button_category') as NodeListOf<HTMLElement>;
+
+    document.addEventListener('click', (event: MouseEvent) => {
+
+        buttons.forEach((button) => {
+            const checkbox = button.querySelector('input[type="checkbox"]') as HTMLInputElement;
+            if (!button.contains(event.target as Node)) {
+                checkbox.checked = false;
+            }
+        });
+    });
+});
+
+</script>

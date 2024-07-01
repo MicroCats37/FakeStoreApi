@@ -1,0 +1,173 @@
+---
+interface Props{
+  images:string[];
+}
+
+const {images} = Astro.props;
+export {images};
+---
+
+<div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+        {
+            images.map((image)=>(
+            <div class="swiper-slide">
+                <div class="cart_image_container">
+                    <div class="cart_image_container_grow">
+                      <img class="swiper_image"src={image} loading="lazy"/>
+                      <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+                    </div>
+                </div>
+            </div>
+            ))
+        }
+    </div>
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-next swiper-pagination-button-next-prev"></div>
+    <div class="swiper-button-prev swiper-pagination-button-next-prev"></div>
+</div>
+
+<style>
+    .swiper {
+      width: 100%;
+      aspect-ratio: 1/1;
+
+    }
+
+    .swiper-slide {
+      display: flex;
+      align-items: center;
+      justify-content: right;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cart_image_container{
+        margin: 5px;
+        border-radius: 10px;
+        background-color: white;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        flex-grow: 1;
+        height: 100%;
+    }
+
+    .cart_image_container_grow{
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        position: relative;
+        width: auto;
+    }
+    .swiper_image{
+
+        object-fit: cover;
+        width: auto;
+        
+        /*height: auto;*/
+        height: 90%;
+    }
+    .swiper-pagination{
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      width: 10% !important;
+      height: 100%;
+    }
+
+    .swiper-pagination img{
+      border: 10px;
+      border-color: aqua;
+    }
+
+    .swiper-button-next{
+      display: none;
+
+    }
+
+    .swiper-button-prev{
+      display: none;
+    }
+
+    @media (max-width: 748px) {
+
+        .cart_image_container{
+            margin: 5px;
+            border-radius: 10px;
+            background-color: white;
+            width: 75%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 0;
+        }
+        .swiper-pagination-button-next-prev{
+          transform: scale(0.8);
+          box-sizing: content-box;
+          color:rgb(255, 255, 255);
+          display: flex;
+          background-color: rgb(74, 0, 139);
+          margin: 10px;
+          padding: 10px;
+          border-radius: 10px;
+          width: 5%;
+          
+        }
+
+        .swiper-pagination{
+          display: none;
+        }
+        
+        .swiper-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+        }
+    }
+
+    
+    /*las popiedades swiper-pagination-bullet en js ya que en css no funcionaban por algun motivo*/
+    /*
+    .no-bg {
+        width: 100%;
+        height: auto;
+        margin: 4px;
+        border-radius: 0;
+        padding: 0;
+        background-color: transparent;
+    }
+
+    .inner-container {
+        width: 100%;
+        height: auto;
+        border: 1px solid black;
+        overflow: hidden;
+    }
+
+    .zoom-image {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.3s ease-in;
+    }
+
+    .zoom-in {
+        transform: scale(1.1);
+    }
+    */
+
+</style>
+
+
+<script src="./Swiper.js"></script>
+

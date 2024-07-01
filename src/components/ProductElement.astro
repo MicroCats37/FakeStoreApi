@@ -1,0 +1,151 @@
+---
+
+import type { Root } from '@/api//types'; 
+interface Props {
+    product: Root;
+    offerPrice?:string;
+}
+
+const { product }: Props = Astro.props;
+const { id, title, price, description, category, image, rating } = product;
+const {offerPrice} =Astro.props
+---
+
+<article class="product_content">
+    <a class="container_click" href=`/product/${id}`>
+        <div class="container_img">
+            <img class="bottom_img"src={image}>
+            <img class="top_img" src={image}>
+        </div>
+    </a>
+
+    <div class="product_name">
+        <p>{title}</p>
+    </div>
+    
+    <div class="product_price">
+        {
+            offerPrice ? (
+            <p class="real_price">{price}</p>
+            <p class="offer_price">{offerPrice}</p>
+        ):
+        (<p class="offer_price">$/{price}</p>)
+    }
+    </div>
+</article>
+
+
+
+<style>
+    /*para  imagenes que tengan un tamño similiar modificar el contenedor container_img*/
+    :root {
+        --color-primario: #ff0000; /* Definir una variable para el color primario */
+        --gap: 5px; /* Definir una variable para el espacio */
+    }
+    
+    .product_content{
+        overflow:visible;
+        background-image: linear-gradient(75deg, rgb(28, 37, 130), rgb(81, 1, 121));
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        gap: var(--gap);
+        padding: var(--gap);
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+        transition: background-image 1s ease;
+        box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .product_content:hover {
+        background-image: linear-gradient(to left, rgb(57, 17, 92), rgb(12, 7, 61));
+    }
+
+    .product_content:hover .top_img{
+        object-fit: cover;
+        opacity: 1;
+        transform: scale(1.05);
+        transition: transform .2s ease-out; 
+    }
+    .container_click{
+        overflow: hidden;
+        width: 100%;
+        background-color: white;
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1
+    }
+    .container_img{
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        position: relative;
+        height: auto;
+    }
+
+    .container_img img{
+        object-fit: cover;
+        width: 100%;
+        
+        /*height: auto;*/
+        height: auto;
+    }
+
+    .top_img{
+        object-fit: cover;
+        position: absolute;
+        left:0;
+        top:0;
+        opacity: 0;
+        transition: all .3s ease-out; 
+
+        
+    }
+
+    .product_name {
+        color: white;
+        font-weight: 700;
+        height: 80px;
+        width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+        text-align: left; /* Alinea el texto a la izquierda */
+         /* Opcional: Agrega un margen para separar el texto del borde izquierdo */
+    }
+
+    .product_name p{
+
+        font-family: 'ProductSans-Light';
+        font-weight: 100;
+    }
+
+    .product_price{
+        color: white;
+        align-self: self-start;
+        display: inline-block;
+        flex-direction: row;
+        background-color: rgb(0, 0, 0);
+        padding: 3px 5px 3px 5px;
+        border-radius: 5px;
+    }
+
+    .product_price p{
+        flex: 1; /* Cada p ocupa el mismo espacio proporcionalmente */
+        margin: 0; /* Opcional: elimina el margen por defecto */
+        text-align:left;
+        font-family: 'ProductSans-Light';
+        font-weight: 100;
+    }
+
+    .real_price{
+        height: 15%;
+        text-decoration: line-through; 
+    }
+</style>

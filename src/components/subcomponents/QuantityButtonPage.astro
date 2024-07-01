@@ -1,0 +1,76 @@
+<div class="number-control-page">
+    <button class="decrement-page">-</button>
+    <input type="number" class="quantity-page" value="1" min="1" max="10" readonly>
+    <button class="increment-page">+</button>
+</div>
+
+<style>
+    .number-control-page {
+        color: rgb(255, 255, 255);
+        display: flex;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 5px 5px 5px 5px;
+        height: 50px;
+        background-color: rgba(255, 255, 255, 0.515);
+    }
+
+    .number-control-page button {
+        color: #000000;
+        height: 100%;
+        aspect-ratio: 1/1;
+        font-size: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .decrement-page{
+        border-radius: 5px 0px 0px 5px;
+    }
+    .increment-page{
+        border-radius: 0px 5px 5px 0px;
+    }
+    .number-control-page button:hover {
+        background-color: #e0e0e0;
+    }
+
+    .number-control-page input {
+        text-align: center;
+        color: #000000;
+        text-align: center;
+        height: 100%;
+        width: 50px;
+        font-size: 20px;
+        pointer-events: none; /* Disable manual input */
+    }
+</style>
+
+<script>
+
+document.querySelectorAll('.number-control-page').forEach(control => {
+        const numberInput = control.querySelector('.quantity-page') as HTMLInputElement;
+        const incrementButton = control.querySelector('.increment-page') as HTMLButtonElement;
+        const decrementButton = control.querySelector('.decrement-page') as HTMLButtonElement;
+
+        incrementButton.addEventListener('click', () => increment(numberInput));
+        decrementButton.addEventListener('click', () => decrement(numberInput));
+    });
+
+    function increment(numberInput: HTMLInputElement) {
+        const max = parseInt(numberInput.max);
+        let currentValue = parseInt(numberInput.value);
+        if (currentValue < max) {
+            numberInput.value = (currentValue + 1).toString();
+        }
+    }
+
+    function decrement(numberInput: HTMLInputElement) {
+        const min = parseInt(numberInput.min);
+        let currentValue = parseInt(numberInput.value);
+        if (currentValue > min) {
+            numberInput.value = (currentValue - 1).toString();
+        }
+    }
+    
+</script>

@@ -1,7 +1,7 @@
 ---
 import IconSearch from "./icons/IconSearch.astro"
 import SearchContent from "./SearchContent.astro"
-
+import IconX from "./icons/IconX.astro"
 ---
 
 <div class="search_button button_script">
@@ -10,7 +10,8 @@ import SearchContent from "./SearchContent.astro"
     </label>
     <div class="search_dropdown">
         <label for="label_x"class="search_x_label">
-            <img class="x_img" src="/src/assets/x_img.svg">
+            <div class="img"><IconX/></div>
+            
         </label>   
         <div class="dropdown_content_search">
             <input id="search_input" type="text" name="text" autocomplete="off" required />
@@ -71,7 +72,7 @@ import SearchContent from "./SearchContent.astro"
         margin: 10px 0;
     }
 
-    .button_content>img{
+    .button_content>.img{
         cursor: pointer;
         height: 100%;
     }
@@ -102,9 +103,9 @@ import SearchContent from "./SearchContent.astro"
         position: absolute;
     }
 
-    .search_x_label>img{
+    .search_x_label>.img{
         cursor: pointer;
-        background-color: aliceblue;
+        background-color: rgb(0, 0, 0);
         border-radius: 50%;
         padding: 5px;
     }

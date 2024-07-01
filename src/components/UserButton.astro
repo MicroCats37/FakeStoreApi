@@ -1,6 +1,7 @@
 ---
 import IconUser from "./icons/IconUser.astro"
 import IconUserB from "./icons/IconUserB.astro"
+import IconX from "./icons/IconX.astro"
 ---
 <div class="user_button button_script" id="user_button">
     <label class="user_button_content button_nav_bar" for="label_user">
@@ -8,7 +9,7 @@ import IconUserB from "./icons/IconUserB.astro"
     </label>
     <div class="user_dropdown"> 
         <label for="label_user"class="search_x_label">
-            <img class="x_img" src="/src/assets/x_img.svg">
+            <div class="img"><IconX/></div>
             <input type="checkbox" name="navbar" class="input_x_check" id="label_user">
         </label>   
         <div class="dropdown_content_user">
@@ -66,7 +67,7 @@ import IconUserB from "./icons/IconUserB.astro"
         margin: 10px 0;
     }
 
-    .user_button_content>img{
+    .user_button_content>.img{
         
         cursor: pointer;
         height: 100%;
@@ -100,9 +101,9 @@ import IconUserB from "./icons/IconUserB.astro"
         position: absolute;
     }
 
-    .search_x_label>img{
+    .search_x_label>.img{
         cursor: pointer;
-        background-color: aliceblue;
+        background-color: rgb(0, 0, 0);
         border-radius: 50%;
         padding: 5px;
     }
@@ -207,6 +208,9 @@ import IconUserB from "./icons/IconUserB.astro"
 
     @media (max-width: 748px) {
         .user_button {
+            display: none;
+        }
+        .button_script{
             display: none;
         }
     }

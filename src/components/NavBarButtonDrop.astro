@@ -5,10 +5,11 @@ interface Props{
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 const {categories} = Astro.props
 import IconArrow from "./icons/IconArrow.astro";
+import IconX from "./icons/IconX.astro";
 ---
 <div class="dropdown_button">
     <div class="button_drop">
-        <a href="/categories"><p>Categorias</p><img src="/src/assets/arrow_dd.svg"></a>
+        <a href="/categories"><p>Categorias</p><div class="img"><IconArrow/></div></a>
     </div>
     <div class="dropdown_content">
         <ul class="list_content">
@@ -74,13 +75,13 @@ import IconArrow from "./icons/IconArrow.astro";
         transition: width 0.3s ease-in-out;
     }
 
-    .button_drop > a > img {
+    .button_drop > a > .img {
         padding: 3px 3px 3px  3px; /* padding: arriba, derecha, abajo, izquierda */
         transition: transform 0.2s ease;
     }
 
 
-    .dropdown_button:hover .button_drop > a > img {
+    .dropdown_button:hover .button_drop > a > .img {
         transform: rotate(180deg); /* Agregamos la rotación al pasar el ratón sobre la imagen */
     }
 

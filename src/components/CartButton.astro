@@ -1,5 +1,6 @@
 ---
 import IconCart from "./icons/IconCart.astro"
+import IconX from "./icons/IconX.astro"
 ---
 
 <div class="cart_button">
@@ -11,7 +12,7 @@ import IconCart from "./icons/IconCart.astro"
             <header class="header_cart">
                 <p>Tu Carrito de Compras</p>
                 <label for="label_xxx" class="search_x_label">
-                    <img class="x_img" src="/src/assets/x_img.svg">
+                    <div class="img"><IconX/></div>
                 </label> 
             </header>
             <footer class="footer_cart">
@@ -66,7 +67,7 @@ import IconCart from "./icons/IconCart.astro"
         margin: 10px 0;
     }
 
-    .cart_button_content>img{
+    .cart_button_content>.img{
         cursor: pointer;
         height: 100%;
     }
@@ -171,7 +172,7 @@ import IconCart from "./icons/IconCart.astro"
         box-shadow: 0px 0px 20px -18px;
     }
 
-    .search_x_label>img{
+    .search_x_label>.img{
         cursor: pointer;
         background-color: aliceblue;
         border-radius: 50%;

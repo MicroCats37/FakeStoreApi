@@ -1,5 +1,6 @@
 ---
 import Login from "./subcomponents/Login.astro"
+import IconX from "./icons/IconX.astro"
 ---
 <div class="login_button" id="login-button">
     <label class="login_button_content button_nav_bar" for="label_login">
@@ -7,7 +8,7 @@ import Login from "./subcomponents/Login.astro"
     </label>
     <div class="login_dropdown">
         <label for="label_login"class="search_x_label">
-            <img class="x_img" src="/src/assets/x_img.svg">
+            <div class="img"><IconX/></div>
         </label>   
         <Login></Login>
     </div>
@@ -107,7 +108,7 @@ import Login from "./subcomponents/Login.astro"
         position: absolute;
     }
 
-    .search_x_label>img{
+    .search_x_label>.img{
         cursor: pointer;
     }
 

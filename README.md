@@ -77,25 +77,28 @@ Este proyecto es una página web de práctica que utiliza TypeScript, Astro y Ax
 -   **`search.ts`**: Lógica del buscador.
 -   **`updateCart.ts`**: Actualiza el carrito.
 -   **`userButton.ts`**: Brinda las características del usuario.
-
+-   
 ## Instalación
 
-1.  Clona el repositorio:
-    
-    sh
-    
-    Copiar código
-    
-    `git clone <URL-del-repositorio>` 
-    
-2.  Instala las dependencias:
-    
-    sh
-    
-    Copiar código
-    
-    `npm install` 
-    
+1. Clona el repositorio:
+
+    ```sh
+    git clone <URL-del-repositorio>
+    ```
+
+2. Instala las dependencias:
+
+    ```sh
+    npm install
+    ```
+
+3. Instala Astro y Axios:
+
+    Si Astro y Axios no están ya incluidos en tu `package.json`, instálalos de la siguiente manera:
+
+    ```sh
+    npm install astro axios
+    ```
 
 ## Uso
 
